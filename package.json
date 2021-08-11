@@ -4,7 +4,7 @@
   "description": "Goose bot",
   "main": "index.js",
   "engines": {
-    "node": "16.6x"
+    "node": "16.6.2"
 },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
