@@ -66,7 +66,7 @@ for (const slashfile of slashcommandFiles) {
 mongoose.init()
 
 
-client.login(config.token)
+client.login(process.env.TOKEN)
 
 
 
