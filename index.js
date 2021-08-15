@@ -4,7 +4,7 @@ const client = new Discord.Client({
 	intents: 32767
 })
 
-const config = require('./config.json')
+//const config = require('./config.json')
 client.on('ready', () => {
 	console.log('Ready')
 })
