@@ -1,15 +1,17 @@
 const fs = require('fs');
 const Discord = require('discord.js')
 const client = new Discord.Client({
-	intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_MESSAGES]
+	intents: 32767
 })
+
 const config = require('./config.json')
 client.on('ready', () => {
 	console.log('Ready')
 })
+const Levels = require('discord-xp')
 
-//Declares three collections. One for commands, one for command cooldowns and another for slash commands!
 
+Levels.setURL(config.mongoPath)
 
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
@@ -64,7 +66,7 @@ for (const slashfile of slashcommandFiles) {
 mongoose.init()
 
 
-client.login(process.env.TOKEN)
+client.login(config.token)
 
 
 

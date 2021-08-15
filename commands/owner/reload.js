@@ -5,8 +5,8 @@ module.exports = {
 	description: 'Reloads a command',
 	args: true,
 	cooldown: 10,
+	ownerOnly: true,
 	execute(message, args) {
-		if(message.author.id !== '435592949137539093') return message.reply('You may not run this command! How did you even find out that it existed... DONT EVER TALK ABOUT THIS.')
 
         const commandName = args[0].toLowerCase();
 		const command = message.client.commands.get(commandName)

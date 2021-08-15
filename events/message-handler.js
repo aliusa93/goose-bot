@@ -1,4 +1,4 @@
-
+const Levels = require('discord-xp')
 const Discord = require('discord.js')
 
 module.exports = {
@@ -29,6 +29,13 @@ if(!guildProfile) {
 
 client.prefix = guildProfile.prefix
 
+const randomXP = Math.floor(Math.random() * 29) + 1; //1-30
+const hasLeveledUp = await Levels.appendXp(message.author.id, message.guild.id, randomXP)
+if(hasLeveledUp) {
+	const user = await Levels.fetch(message.author.id, message.guild.id)
+	message.channel.send(`You have proceeded to level ${user.level}. Continue sending messages to level up more!`)
+}
+
 //If you did not want guild prefixes using a database, you would just say that client.prefix = "your prefix here"
 
 
@@ -53,6 +60,8 @@ client.prefix = guildProfile.prefix
 				return message.reply('You can not do this!');
 			}
 		}
+
+		if(command.ownerOnly && message.author.id !== '435592949137539093') return message.channel.send('Only the bot owner can run this command!')
 
 		//Guild only property!
 	if (command.guildOnly && message.channel.type === 'dm') {

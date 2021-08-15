@@ -2,10 +2,27 @@ const mongoose = require('mongoose')
 const Guild = require('../../db/models/guild-schema')
 const Discord = require('discord.js')
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = {
     name: 'settings',
     description: 'Allows the server owner to change the guild settings!',
     async execute(message, args, client) {
+        const { member, channel, content, guild } = message
+        const cache = {}
         //settings
         let guildProfile = await Guild.findOne({ guildId: message.guild.id})
         if(!guildProfile) {
@@ -28,7 +45,7 @@ module.exports = {
             message.channel.send( {embeds: [embed]} )
 
         } else {
-            if (!["prefix", "muteRoleID", "memberRoleID"].includes(args[0])) return message.channel.send('You must specify valid  setting to change! Settings: prefix, welcomeChannel.')
+            if (!["prefix", "muteRoleID", "memberRoleID", "welcomeChannel"].includes(args[0])) return message.channel.send('You must specify valid  setting to change! Settings: prefix, welcomeChannel.')
             if(!args[1]) return message.channel.send('You did not state a value to update that property to.')
 
             if("prefix" === args[0]) {
@@ -41,10 +58,20 @@ module.exports = {
                 await Guild.findOneAndUpdate({ guildId: message.guild.id}, { memberRoleID: args[1], lastEdited: Date.now() })
                 message.channel.send(`Updated ${args[0]} to ${args[1]}`)
             } else if ("welcomeChannel" === args[0]) {
-                await Guild.findOneAndUpdate({ guildId: message.guild.id}, { welcomeChannel: message.channel.id, lastEdited: Date.now() })
-                message.channel.send(`Updated welcome channel. Welcome messages will show here now!`)
+               const welcomeChannel = message.channel.id
+               args.shift()
+               const text = args.join(' ')
+                await Guild.findOneAndUpdate({ guildId: message.guild.id}, { welcomeChannel: message.channel.id, text: text, lastEdited: Date.now() }, { upsert: true, })
+    
+                message.channel.send(`Updated welcome channel. Welcome messages will show here now! Your welcome message: ${text}`)
+                    }
+                }
             }
             
         }
-    }
-}
+
+
+        
+
+
+
