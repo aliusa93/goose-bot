@@ -4,14 +4,14 @@ const client = new Discord.Client({
 	intents: 32767
 })
 
-const config = require('./config.json')
+require('dotenv').config()
 client.on('ready', () => {
 	console.log('Ready')
 })
 const Levels = require('discord-xp')
 
 
-Levels.setURL(config.mongoPath)
+Levels.setURL(process.env.mongoPath)
 
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();

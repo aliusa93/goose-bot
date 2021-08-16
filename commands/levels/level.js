@@ -1,5 +1,4 @@
 const Levels = require('discord-xp')
-const canvacord = require('canvacord')
 
 module.exports = {
     name: 'level',

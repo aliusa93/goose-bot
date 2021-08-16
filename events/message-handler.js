@@ -34,6 +34,36 @@ const hasLeveledUp = await Levels.appendXp(message.author.id, message.guild.id, 
 if(hasLeveledUp) {
 	const user = await Levels.fetch(message.author.id, message.guild.id)
 	message.channel.send(`You have proceeded to level ${user.level}. Continue sending messages to level up more!`)
+
+	if(user.level == 5) {
+		const role = message.guild.roles.cache.get.find(role => role.name === 'Level 5')
+		if(!role) await message.guild.roles.create({
+			name: 'Level 5',
+			color: "GREY",
+		}).catch(err => console.error(err))
+		if(message.member.roles.cache.has(role.id)) return;
+		else await message.member.roles.add(role.id)
+	}
+
+	if(user.level == 10) {
+		const role = message.guild.roles.cache.get.find(role => role.name === 'Level 5')
+		if(!role) await message.guild.roles.create({
+			name: 'Level 10',
+			color: "GREY",
+		}).catch(err => console.error(err))
+		if(message.member.roles.cache.has(role.id)) return;
+		else await message.member.roles.add(role.id)
+	}
+
+	if(user.level == 15) {
+		const role = message.guild.roles.cache.get.find(role => role.name === 'Level 5')
+		if(!role) await message.guild.roles.create({
+			name: 'Level 15',
+			color: "GREY",
+		}).catch(err => console.error(err))
+		if(message.member.roles.cache.has(role.id)) return;
+		else await message.member.roles.add(role.id)
+	}
 }
 
 //If you did not want guild prefixes using a database, you would just say that client.prefix = "your prefix here"
@@ -56,7 +86,7 @@ if(hasLeveledUp) {
 		//Making permissions property
 		if (command.permissions) {
 			const authorPerms = message.channel.permissionsFor(message.author);
-			if (!authorPerms || !authorPerms.has(command.permissions)) {
+			if (!authorPerms || !authorPerms.permissions.has(command.permissions)) {
 				return message.reply('You can not do this!');
 			}
 		}
