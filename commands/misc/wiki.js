@@ -9,7 +9,7 @@ module.exports = {
     name: 'wiki',
     description: 'Search anything on wikipedia!',
     async execute(message, args, client) {
-        const wiki = args.slice().join(' ')
+        const wiki = args.join(' ').toLowerCase()
         if(!wiki) return message.reply('Provide A Query To Search.') // If Nothing Is Searched
         const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(wiki)}` // From Here BOT Will Search For It
 

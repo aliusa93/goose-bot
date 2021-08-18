@@ -1,3 +1,6 @@
+
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
 const fs = require('fs');
 const Discord = require('discord.js')
 const client = new Discord.Client({
@@ -46,17 +49,47 @@ for (const folder of commandFolders) {
 	}
 }
 
+
+const slashCommands = [];
+
+
+
+const clientId = '871040665243512843';
+const guildId = '825004828647227393';
 //Slash commands!
 const slashcommandFiles = fs.readdirSync('./slash').filter(file => file.endsWith('.js'));
 
+
+
 for (const slashfile of slashcommandFiles) {
-	const slashcommand = require(`./slash/${slashfile}`);
-	// set a new item in the Collection
-	// with the key as the command name and the value as the exported module
-	client.commands.set(slashcommand.name, slashcommand);
+	const slashCommand = require(`./slash/${slashfile}`)
+	slashCommands.push(slashCommand.data.toJSON())
+	client.slashcommands.set(slashCommand.data.name, slashCommand)
+
+	
 }
 
+const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 
+
+
+
+
+
+(async () => {
+	try {
+		console.log('Started refreshing application (/) commands.');
+
+		await rest.put(
+			Routes.applicationGuildCommands(clientId, guildId),
+			{ body: slashCommands },
+		);
+
+		console.log('Successfully reloaded application (/) commands.');
+	} catch (error) {
+		console.error(error);
+	}
+})();
 
 
 

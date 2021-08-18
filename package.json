@@ -12,7 +12,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@discordjs/builders": "^0.5.0",
+    "@discordjs/rest": "^0.1.0-canary.0",
     "axios": "^0.21.1",
+    "canvacord": "^5.2.3",
+    "canvas": "^2.8.0",
+    "discord-api-types": "^0.22.0",
+    "discord-randomizers": "^1.0.0",
     "discord-xp": "^1.1.16",
     "discord.js": "^13.0.1",
     "dotenv": "^10.0.0",
