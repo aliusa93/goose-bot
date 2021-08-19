@@ -17,11 +17,12 @@
     "axios": "^0.21.1",
     "canvacord": "^5.2.3",
     "canvas": "^2.8.0",
+    "currency-system": "^2.6.21",
     "discord-api-types": "^0.22.0",
     "discord-randomizers": "^1.0.0",
-    "discord-xp": "^1.1.16",
     "discord.js": "^13.0.1",
     "dotenv": "^10.0.0",
+    "mathjs": "^9.4.4",
     "mongoose": "^5.13.5",
     "node-fetch": "^2.6.1"
   }

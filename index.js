@@ -12,10 +12,9 @@ require('dotenv').config()
 client.on('ready', () => {
 	console.log('Ready')
 })
-const Levels = require('discord-xp')
 
 
-Levels.setURL(process.env.mongoPath)
+
 
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();

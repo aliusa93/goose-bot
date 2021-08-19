@@ -1,35 +1,61 @@
-const { MessageEmbed, MessageActionRow, MessageSelectMenu } = require('discord.js')
-
+const {
+    MessageEmbed,
+    MessageActionRow,
+    MessageSelectMenu
+} = require('discord.js')
 
 module.exports = {
     name: 'help',
-    description: 'Displays all commands with a selection menu!',
-    async execute(message, client) {
+    async execute(message) {
         const row = new MessageActionRow()
-        .addComponents(
-            new MessageSelectMenu()
+            .addComponents(
+                new MessageSelectMenu()
                 .setCustomId('help-menu')
                 .setPlaceholder('Please choose a category to list the commands for.')
-                .addOptions([
-                    {
-                        label: 'Misc',
-                        description: 'Misc commands!',
-                        value: 'Misc',
-                        emoji: '😀'
-                    },{
-                        label: 'Moderation',
-                        description: 'Moderation commands!',
-                        value: 'Moderation',
-                        emoji: '👮'
-                    }, {
-                        label: 'Economy',
-                        description: 'Economy commands!',
-                        value: 'Economy',
-                        emoji: '💰'
-                    }
-                ])
-        
-        )
-        message.channel.send({ content: 'Help Selection Menu', components:[row] })
+                .addOptions([{
+                    label: 'Misc',
+                    description: 'Misc commands!',
+                    value: `Here are a list of the **misc** category commands: ping, help, simprate, wiki`,
+                    emoji: '😀'
+                }, {
+                    label: 'Moderation',
+                    description: 'Moderation commands!',
+                    value: 'Here are a list of the **moderation** category commands: ban, kick, settings.',
+                    emoji: '👮'
+                }, {
+                    label: 'Economy',
+                    description: 'Economy commands!',
+                    value: 'None for now, coming soon.',
+                    emoji: '💰'
+                }])
+
+
+            )
+
+
+        const filter = (interaction) => interaction.isSelectMenu() && message.author.id;
+
+
+        const collector = message.channel.createMessageComponentCollector({
+            filter,
+            max: '6',
+            time: 10000,
+        })
+
+        collector.on('collect', async (collected) => {
+            const value = collected.values[0]
+
+            collected.deferUpdate()
+
+
+
+            collected.channel.send({
+                content: value
+            })
+        })
+        message.reply({
+            content: 'Below is the help menu, after a certain amount of time, the dropdown will stop working.',
+            components: [row]
+        })
     }
 }

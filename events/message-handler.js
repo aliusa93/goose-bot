@@ -1,4 +1,4 @@
-const Levels = require('discord-xp')
+
 const Discord = require('discord.js')
 
 module.exports = {
