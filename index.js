@@ -32,7 +32,7 @@ CurrencySystem.cs.on('debug', (debug, error) => {
     if (error) console.error(error);
 });
 //sets mongo url
-cs.setMongoURL(process.env.MongoPath);
+cs.setMongoURL('mongodb+srv://goosedev:2v8ywvaeUEWX46DV@jojo-bot.h2itb.mongodb.net/myFirstDatabase?retryWrites=true&w=');
 //sets default wallet amount when ever new user is created.
 cs.setDefaultWalletAmount(100)
 //sets default bank amount when ever new user is created.
