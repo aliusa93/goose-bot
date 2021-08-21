@@ -24,6 +24,22 @@ client.slashcommands = new Discord.Collection()
 const mongoose = require('./db/mongoose')
 
 
+//Economy npm init
+const CurrencySystem = require("currency-system");
+const cs = new CurrencySystem;
+CurrencySystem.cs.on('debug', (debug, error) => {
+    console.log(debug);
+    if (error) console.error(error);
+});
+//sets mongo url
+cs.setMongoURL(process.env.MongoPath);
+//sets default wallet amount when ever new user is created.
+cs.setDefaultWalletAmount(100)
+//sets default bank amount when ever new user is created.
+cs.setDefaultBankAmount(1000)
+
+
+
 //Shows code which directory events go to!
 
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));

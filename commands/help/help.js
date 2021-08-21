@@ -25,7 +25,7 @@ module.exports = {
                 }, {
                     label: 'Economy',
                     description: 'Economy commands!',
-                    value: 'None for now, coming soon.',
+                    value: 'Here are a list of the **economy** category commands: balance, deposit, rob, withdraw, work, leaderboard.',
                     emoji: '💰'
                 }])
 
