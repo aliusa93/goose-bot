@@ -25,7 +25,7 @@ module.exports = {
                 }, {
                     label: 'Economy',
                     description: 'Economy commands!',
-                    value: 'Balance, deposit, leaderboard, rob, withdraw, work.',
+                    value: 'Balance, deposit, leaderboard, rob, withdraw, work, beg, daily, hourly, weekly, give',
                     emoji: '💰'
                 }])
 

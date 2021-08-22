@@ -12,7 +12,7 @@ module.exports = {
     args: true,
     usage: '<Amount that you want to withdraw>',
     async execute(message, args) {
-        let money = args[0]
+        let money = args[0].toLowerCase()
         let result = await cs.withdraw({
             user: message.author,
             guild: message.guild,
