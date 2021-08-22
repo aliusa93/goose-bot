@@ -10,7 +10,8 @@ module.exports = {
     .setDescription('Is the person epic or no?')
     .addUserOption(option => option.setName('target').setDescription('Select a user')),
     async execute (interaction) {
-        const response = random.twoRandomStr('epic', 'no')
+        if(interaction.member.id === '435592949137539093') return await interaction.reply('ULTRA EPIK')
+        const response = random.twoRandomStr('epic', 'no') 
         await interaction.reply(response.toString())
     }
 }
