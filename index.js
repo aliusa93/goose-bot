@@ -70,7 +70,7 @@ const slashCommands = [];
 
 
 const clientId = '871040665243512843';
-const guildId = '825004828647227393';
+const guildId = ['825004828647227393', '823293748392755200'];
 //Slash commands!
 const slashcommandFiles = fs.readdirSync('./slash').filter(file => file.endsWith('.js'));
 
