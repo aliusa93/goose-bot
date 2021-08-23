@@ -1,3 +1,6 @@
+
+
+
 module.exports = {
     name: 'beg',
     async execute(message, args, client) {
@@ -8,7 +11,7 @@ module.exports = {
             maxAmount: 400
     
         });
-        if (result.error) return message.channel.send(`You have begged recently Try again in ${result.time}`);
+        if (result.error) return message.channel.send(`You have begged recently. Try again in ${result.time}`);
         else message.channel.send(`Ok fine... I will give you $${result.amount}`)
     }
 }
