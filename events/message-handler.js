@@ -16,20 +16,22 @@ module.exports = {
 
 		const Guild = require('../db/models/guild-schema')
 
-
-
-
-		let guildProfile = await Guild.findOne({
-			guildId: message.guild.id
-		})
-		if (!guildProfile) {
-			guildProfile = await new Guild({
+		if(message.guild) {
+			let guildProfile = await Guild.findOne({
 				guildId: message.guild.id
 			})
-			await guildProfile.save().catch(err => console.error(err))
+			if (!guildProfile) {
+				guildProfile = await new Guild({
+					guildId: message.guild.id
+				})
+				await guildProfile.save().catch(err => console.error(err))
+			}
+	
+			client.prefix = guildProfile.prefix
 		}
 
-		client.prefix = guildProfile.prefix
+
+	
 
 
 		//If you did not want guild prefixes using a database, you would just say that client.prefix = "your prefix here"
@@ -48,7 +50,7 @@ module.exports = {
 
 		if (!client.commands.has(commandName)) return;
 		//Using command aliases
-		const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+		const command = client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName)) || client.commands.get(commandName)
 		
 
 		if (!command) return;
