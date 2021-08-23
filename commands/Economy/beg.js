@@ -1,5 +1,8 @@
 
 
+const CurrencySystem = require("currency-system");
+const { MessageEmbed } = require("discord.js");
+const cs = new CurrencySystem;
 
 module.exports = {
     name: 'beg',
