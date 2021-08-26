@@ -12,7 +12,8 @@ module.exports = {
     args: true,
     usage: '<Amount that you want to withdraw>',
     async execute(message, args) {
-        let money = args[0].toLowerCase()
+        let money = args.join(' ')
+        if(isNaN(money)) return message.channel.send('Amount specified is not a valid number!')
         let result = await cs.withdraw({
             user: message.author,
             guild: message.guild,

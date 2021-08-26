@@ -19,10 +19,8 @@ module.exports = {
 
         if(user.bot || user === client.user) return message.channel.send('This user is a bot!')
         if (!client.users.cache.get(user.id) || !user) return message.channel.send('Sorry, you forgot to mention somebody.');
-        let amount = args[1].toLowerCase();
-        if (!amount) return message.channel.send("Enter amount of money to add.");
-        if (amount.includes("-")) return message.channel.send("You can't send negative money.")
-        let money = parseInt(amount);
+        let money = args.join(' ')
+        if(isNaN(money)) return message.channel.send('Amount specified is not a valid number!')
 
         let result = await cs.transferMoney({
             user: message.author,
