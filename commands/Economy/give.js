@@ -16,11 +16,12 @@ module.exports = {
         } else {
             user.id = "1"
         }
-
         if(user.bot || user === client.user) return message.channel.send('This user is a bot!')
         if (!client.users.cache.get(user.id) || !user) return message.channel.send('Sorry, you forgot to mention somebody.');
-        let money = args.join(' ')
-        if(isNaN(money)) return message.channel.send('Amount specified is not a valid number!')
+        if(user.id === message.member.id) return;
+        let money = args[1]
+        
+        
 
         let result = await cs.transferMoney({
             user: message.author,
