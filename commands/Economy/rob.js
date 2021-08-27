@@ -17,6 +17,8 @@ module.exports = {
             if (user) user = user.user;;
         }
 
+        if(user.id = message.member.id) return message.channel.send('You cannot rob yourself!')
+
         if (user.bot || user === client.user) return message.channel.send("This user is a bot.");
         if (!user) return message.channel.send('Sorry, you forgot to mention somebody.');
 
