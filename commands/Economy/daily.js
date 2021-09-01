@@ -9,7 +9,7 @@ module.exports = {
         let result = await cs.daily({
             user: message.author,
             guild: message.guild,
-            amount: 100,
+            amount: 1000,
 
         });
         if (result.error) return message.channel.send(`You have used daily recently. Try again in ${result.time}`);

@@ -12,9 +12,10 @@ module.exports = {
         let result = await cs.work({
             user: message.author,
             guild: message.guild,
-            maxAmount: 100,
+            minAmount: 100,
+            maxAmount: 200,
             replies: ['Programmer', 'Builder', 'Waiter', 'Busboy', 'Chef', 'Mechanic'],
-            cooldown: 25 //25 seconds,
+            cooldown: 60 //25 seconds,
 
         });
         if (result.error) return message.channel.send(`You have already worked recently. Try again in ${result.time}`);

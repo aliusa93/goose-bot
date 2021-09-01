@@ -10,8 +10,8 @@ module.exports = {
         let result = await cs.beg({
             user: message.author,
             guild: message.guild,
-            minAmount: 100,
-            maxAmount: 400
+            minAmount: 20,
+            maxAmount: 85
     
         });
         if (result.error) return message.channel.send(`You have begged recently. Try again in ${result.time}`);

@@ -9,9 +9,6 @@ const client = new Discord.Client({
 
 require('dotenv').config()
 //const config = require('./config.json')
-client.on('ready', () => {
-	console.log('Ready')
-})
 
 
 
@@ -19,6 +16,7 @@ client.on('ready', () => {
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 client.slashcommands = new Discord.Collection()
+client.words = new Discord.Collection()
 
 
 const mongoose = require('./db/mongoose')

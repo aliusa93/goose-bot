@@ -7,7 +7,7 @@ module.exports = {
         let result = await cs.weekly({
             user: message.author,
             guild: message.guild,
-            amount: 100,
+            amount: 10000,
     
         });
         if (result.error) return message.channel.send(`You have used weekly recently. Try again in ${result.time}`);
