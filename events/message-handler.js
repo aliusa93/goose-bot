@@ -1,5 +1,6 @@
 
 const Discord = require('discord.js')
+const db = require('../db/models/command-schema')
 
 module.exports = {
 	name: 'messageCreate',
@@ -103,15 +104,18 @@ module.exports = {
 		timestamps.set(message.author.id, now);
 		setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
+		
+			try {
+				command.execute(message, args, client)
+			} catch (error) {
+				console.error(error)
+				message.channel.send('There was an error executing this command!')
+			}
+	
 
-		//Tries to execute command, but if it finds an error, it will console error that error and complain to the user!
+		
+		
 
-		try {
-			command.execute(message, args, client);
-		} catch (error) {
-			console.error(error);
-			message.reply('There was an error trying to execute that command!');
-		}
 
 
 	},
