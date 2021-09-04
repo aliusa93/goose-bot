@@ -5,7 +5,7 @@ const Guild = require('../../db/models/guild-schema')
 
 module.exports = {
     name: 'prefix',
-    description: 'Allows the server owner to change the guild ',
+    description: 'Allows the server owner to change the guild prefix',
     async execute(message, args, client) {
         //settings
         let guildProfile = await Guild.findOne({

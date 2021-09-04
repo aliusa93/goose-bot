@@ -7,6 +7,9 @@ const client = new Discord.Client({
 	intents: 32767
 })
 
+const Schema = require('./db/models/antiswear-schema')
+const path = require('path')
+
 require('dotenv').config()
 //const config = require('./config.json')
 
@@ -88,7 +91,6 @@ const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 
 
 
-
 (async () => {
 	try {
 		console.log('Started refreshing application (/) commands.');
@@ -104,6 +106,42 @@ const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 	}
 })();
 
+
+client.on('ready', () => {
+	const { getCommands } = require('./utils/index')
+	const clientDetails = {
+		guilds: client.guilds.cache.size,
+		users: client.users.cache.size,
+		channels: client.channels.cache.size
+	}
+	console.log(`${client.user.tag} is online!`)
+
+	Schema.find().then(((data) => {
+		data.forEach((val) => {
+			client.words.set(val.GuildId, val.Words)
+		})
+	}))
+	const express = require('express')
+	const app = express()
+	const port = process.env.PORT || 3001;
+
+	app.set("view engine", "ejs")
+
+	app.get("/", (req, res) => {
+		res.status(200).sendFile(path.join(__dirname, 'pages', 'landingPage.html'))
+	})
+
+	app.get("/commands", (req, res) => {
+		const commands = getCommands()
+		res.status(200).render('commands', { commands })
+	})
+
+	app.get("/info", (req, res) => {
+		res.status(200).send(clientDetails)
+	})
+
+	app.listen(port)
+})
 
 
 

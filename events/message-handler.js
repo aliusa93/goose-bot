@@ -1,6 +1,5 @@
 
 const Discord = require('discord.js')
-const db = require('../db/models/command-schema')
 
 module.exports = {
 	name: 'messageCreate',
