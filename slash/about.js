@@ -15,7 +15,7 @@ module.exports = {
             value: 'Sensei Goose'
         }, {
             name: 'Website',
-            value: 'Coming..... ||Not Soon||'
+            value: 'https://goose-bot-backup.herokuapp.com/'
         }, {
             name: 'News',
             value: 'Goose bot will be switching to slash commands on <t:1641358800>'
