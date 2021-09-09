@@ -7,6 +7,7 @@ module.exports = {
     name: 'prefix',
     description: 'Allows the server owner to change the guild prefix',
     async execute(message, args, client) {
+        if(!message.member.permissions.has('ADMINSTRATOR')) return message.channel.send('You must have the ADMINSTRATOR permission to run this command!')
         //settings
         let guildProfile = await Guild.findOne({
             guildId: message.guild.id

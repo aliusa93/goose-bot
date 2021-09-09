@@ -22,6 +22,7 @@ client.slashcommands = new Discord.Collection()
 client.words = new Discord.Collection()
 
 
+
 const mongoose = require('./db/mongoose')
 
 

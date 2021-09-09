@@ -3,6 +3,7 @@ const logSchema = require('../../db/models/log-schema')
 module.exports = {
     name: 'logchannel',
     async execute(message, args, client) {
+        if(!message.member.permissions.has('ADMINSTRATOR')) return message.channel.send('You must have the ADMINSTRATOR permission to run this command!')
         const channel = message.mentions.channels.first()
         if(!channel) return message.channel.send('Please specify a channel.')
 

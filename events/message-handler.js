@@ -1,12 +1,13 @@
 
 const Discord = require('discord.js')
+const custom = require('../db/models/commands-schema')
 
 module.exports = {
 	name: 'messageCreate',
 	async execute(message, client) {
 
 
-
+		
 		
 
 
@@ -27,7 +28,7 @@ module.exports = {
 				await guildProfile.save().catch(err => console.error(err))
 			}
 	
-			client.prefix = guildProfile.prefix
+			client.prefix = guildProfile.prefix 
 		}
 
 
@@ -36,12 +37,12 @@ module.exports = {
 
 		//If you did not want guild prefixes using a database, you would just say that client.prefix = "your prefix here"
 
-		if (message.content === '<@871040665243512843>') {
-			message.channel.send(`My prefix is ${client.prefix}`)
-		}
+		
 
 
-		if (!message.content.startsWith(client.prefix) || message.author.bot) return;
+		if (message.author.bot) return;
+
+		
 
 
 		//Args system
@@ -53,8 +54,9 @@ module.exports = {
 		const command = client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName)) || client.commands.get(commandName)
 		
 
-		if (!command) return;
+		
 
+		
 		//Making permissions property
 		if (command.permissions) {
 			const authorPerms = message.channel.permissionsFor(message.author);

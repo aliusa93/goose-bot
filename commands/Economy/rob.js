@@ -1,6 +1,7 @@
 const CurrencySystem = require("currency-system");
 const { MessageEmbed } = require("discord.js");
 const cs = new CurrencySystem;
+const schema = require('../../db/models/passive-schema')
 
 
 module.exports = {
@@ -9,6 +10,9 @@ module.exports = {
     args: true,
     usage: '<@Target>',
     async execute(message, args, client) {
+
+        const authordata  = await schema.findOne({ GuildId: message.guild.id, UserId: message.author.id, Passive: true, })
+        if(authordata) return message.channel.send('You have passive mode enabled, so you cannot use this command!')
         let user;
         if (message.mentions.users.first()) {
             user = message.mentions.users.first();
@@ -20,6 +24,9 @@ module.exports = {
 
         if (user.bot || user === client.user) return message.channel.send("This user is a bot.");
         if (!user) return message.channel.send('Sorry, you forgot to mention somebody.');
+
+        const userdata  = await schema.findOne({ GuildId: message.guild.id, UserId: user.id, Passive: true, })
+        if(userdata) return message.channel.send('You cannot rob users that have passive mode on!')
 
         let result = await cs.rob({
             user: message.author,
