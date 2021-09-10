@@ -1,6 +1,6 @@
 
 const Discord = require('discord.js')
-const custom = require('../db/models/commands-schema')
+const premiumSchema = require('../db/models/premium-schema')
 
 module.exports = {
 	name: 'messageCreate',
@@ -81,6 +81,19 @@ module.exports = {
 
 			return message.channel.send(reply);
 		}
+
+
+		if(command.premium) {
+			premiumSchema.findOne({ GuildId: message.guild.id}, async(err, data) => {
+				if(!data)
+					return message.reply('This is a premium command!\n Buy premium here: https://goose-bot-backup.herokuapp.com/premium')
+
+				if(data.Permanent && Date.now() > data.Expire) {
+					data.delete()
+					return message.reply('The premium system is expired!\n Buy premium here: https://goose-bot-backup.herokuapp.com/premium')
+				} 
+			})
+		}
 		//Cooldowns
 		const {
 			cooldowns
@@ -107,7 +120,25 @@ module.exports = {
 
 		
 			try {
-				command.execute(message, args, client)
+
+				if(command.premium) {
+					premiumSchema.findOne({ GuildId: message.guild.id}, async(err, data) => {
+						if(!data)
+							return message.reply('This is a premium command!\n Buy premium here: https://goose-bot-backup.herokuapp.com/premium')
+		
+						if(data.Permanent && Date.now() > data.Expire) {
+							data.delete()
+							return message.reply('The premium system is expired!\n Buy premium here: https://goose-bot-backup.herokuapp.com/premium')
+						} 
+
+						if(data) {
+							command.execute(message, args, client)
+						}
+					})
+				} else {
+					command.execute(message, args, client)
+				}
+			
 			} catch (error) {
 				console.error(error)
 				message.channel.send('There was an error executing this command!')

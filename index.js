@@ -139,6 +139,12 @@ client.on('ready', () => {
 
 	app.get("/info", (req, res) => {
 		res.status(200).send(clientDetails)
+		
+	})
+
+	app.get("/premium", (req, res) => {
+		res.status(200).send('Coming Soon')
+		
 	})
 
 	app.listen(port)
