@@ -13,7 +13,9 @@
   "license": "ISC",
   "dependencies": {
     "@discordjs/builders": "^0.5.0",
+    "@discordjs/opus": "^0.6.0",
     "@discordjs/rest": "^0.1.0-canary.0",
+    "@discordjs/voice": "^0.6.0",
     "axios": "^0.21.1",
     "canvacord": "^5.2.3",
     "canvas": "^2.8.0",
@@ -22,6 +24,7 @@
     "discord-api-types": "^0.22.0",
     "discord-randomizers": "^1.0.0",
     "discord.js": "^13.0.1",
+    "distube": "^3.0.0-beta.38",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",

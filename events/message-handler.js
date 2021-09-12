@@ -143,6 +143,8 @@ module.exports = {
 				console.error(error)
 				message.channel.send('There was an error executing this command!')
 			}
+
+		
 	
 
 		
