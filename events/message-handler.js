@@ -40,7 +40,7 @@ module.exports = {
 		
 
 
-		if (message.author.bot) return;
+		if (!message.content.startsWith(client.prefix) || message.author.bot) return;
 
 		
 
